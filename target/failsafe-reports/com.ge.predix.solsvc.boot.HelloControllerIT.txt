@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.ge.predix.solsvc.boot.HelloControllerIT
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.719 sec - in com.ge.predix.solsvc.boot.HelloControllerIT
