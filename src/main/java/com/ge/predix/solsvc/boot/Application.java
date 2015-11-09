@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.web.context.support.StandardServletEnvironment;
@@ -62,8 +64,8 @@ import org.springframework.web.context.support.StandardServletEnvironment;
         DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class,
         PersistenceExceptionTranslationAutoConfiguration.class
 })
-@ComponentScan
-public class Application extends PredixSpringBootInitializer
+@ComponentScan(basePackages="com.ge.predix.solsvc")
+public class Application
 {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -104,6 +106,16 @@ public class Application extends PredixSpringBootInitializer
                 log.info("propertySource=" + propertySource.getName() + " values=" + propertySource.getSource() + "class=" + propertySource.getClass());           
             }         
         }
+    }
+    
+    /**
+     * Ensure the Tomcat container comes up, not the Jetty one.
+     * @return - the factory
+     */
+    @Bean
+    public TomcatEmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory()
+    {
+        return new TomcatEmbeddedServletContainerFactory();
     }
 
 }

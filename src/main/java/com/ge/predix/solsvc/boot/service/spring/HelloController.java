@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * An example of creating a Rest api using Spring Annotations @RestController.  
  * 
  *   
- * Note that predix-boot project helps you register using a CXF Template    
+ * 
  * @author predix
  */
 @RestController
