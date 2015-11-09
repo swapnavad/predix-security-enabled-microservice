@@ -1,0 +1,5 @@
+---
+applications:
+  - name: predix-boot-cf
+    buildpack: java_buildpack
+    path: target/predix-boot-cf-1.1.4.jar 
