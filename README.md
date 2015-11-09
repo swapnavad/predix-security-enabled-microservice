@@ -1,15 +1,11 @@
-Predix Boot
-==============
+Predix Boot Spring
+==================
 
 Welcome to Predix Boot, a Predix Backend Microservice Template.  
 
-The predix-boot-cf project is a cloud ready microservice that explains how to make either [CXF](https://cxf.apache.org/) or [Spring](https://spring.io/) RestTemplate based REST services.  You simply change the @Path url and start writing up your service implementation.  It also has SpringBoot, Spring Profiles and Property file management all set up and ready for local development vs. cloud deployment.  It also is set up for Test Driven Development with JUnit and Mockito.  To see how it starts up, see the [Application.java](https://github.com/PredixDev/predix-boot/blob/master/predix-boot-cf/src/main/java/com/ge/predix/solsvc/boot/Application.java) in predix-boot-cf.
+The predix-boot-cf-spring project is a cloud ready microservice that explains how to make a [Spring](https://spring.io/) RestTemplate based REST services.  You simply change the @Path url and start writing up your service implementation.  It also has SpringBoot, Spring Profiles and Property file management all set up and ready for local development vs. cloud deployment.  It also is set up for Test Driven Development with JUnit and Mockito.  To see how it starts up, see the [Application.java](https://github.com/PredixDev/predix-boot/blob/master/predix-boot-cf/src/main/java/com/ge/predix/solsvc/boot/Application.java) in predix-boot-cf.
 
-The predix-rest-client project provides standard GET, PUT, POST, DELETE with helpers to manage Predix OAuth Security in the cloud.  See the property files and [IOauthRestConfig.java](https://github.com/PredixDev/predix-boot/blob/master/predix-rest-client/src/main/java/com/ge/predix/solsvc/restclient/config/IOauthRestConfig.java) which allow a microservice to connect to Predix UAA (User Authentication and Authorization) servers in the cloud. All the reference app microservices use this utility to make Rest calls in the cloud.
-
-Once you are familiar with the project and need to make your own microservice, take the predix-boot-cf project as your starting point for a Cloud Foundry Rest Microservice.  Univerally change 'predix-boot' to 'my-servicename' (using eclipse) and check in to your own repo.
-
->For GE Predix users, the predix-boot-dsp-cf has all the features of predix-boot-cf plus it helps bring a backwards compatible bundle from non-cloud Predix DSP implementations to the cloud simply by adding a dependency to your old rest service code to your project.  If you use Spring, you just use the @ImportResource annotation to list the Spring XML files from your old project.  In other words, it's a cloud-foundry cabable wrapper around your old Rest service that suddenly makes it deployable to the cloud. 
+Once you are familiar with the project and need to make your own microservice, take the predix-boot-cf-spring project as your starting point for a Cloud Foundry Rest Microservice.  Univerally change 'predix-boot' to 'my-servicename' (using eclipse) and check in to your own repo.
 
 ##To Download and Push Predix-Boot
 
@@ -18,9 +14,9 @@ Once you are familiar with the project and need to make your own microservice, t
 1. Download a [DevBox](https://www.predix.io/catalog/other-resources/devbox.html) and launch it in Virtual Box or install the [Dependencies](#dependencies)
 1. Download Predix-Boot  
   ```
-  $ git clone https://github.com/PredixDev/predix-boot.git  
+  $ git clone https://github.com/PredixDev/predix-boot-cf-spring.git  
   
-  $ cd predix-boot  
+  $ cd predix-boot-cf-spring
   
   $mvn clean package  
   
@@ -30,25 +26,22 @@ Once you are familiar with the project and need to make your own microservice, t
   ```
   $ mvn eclipse:clean eclipse:eclipse  
   
-  File/Import/General/Existing Projects/Browse to predix-boot dir  
+  File/Import/General/Existing Projects/Browse to predix-boot-cf-spring dir  
   
   Check the box 'Search for nested projects'  
   ```
 1. Try it out locally  
   ```
-  Right Click predix-boot-cf project / Run As / Spring Boot App  
+  Right Click predix-boot-cf-spring project / Run As / Spring Boot App  
   
   Visit service at http://localhost:9092 - a Spring RestTemplate  
   
-  and http://localhost:9092/services/ping - a CXF Rest Endpoint  
-  
-  and http://localhost:9092/services?_wadl - a CXF Rest descriptor
   ```
 1. Push to cloud  
 
     Take a look at the predix-boot-cf manifest.yml which provides properties and instructions for [pushing cloud foundry apps](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html)
   ```
-  $ cd predix-boot-cf
+  $ cd predix-boot-cf-spring
   
   $ cf push  
   
