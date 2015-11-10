@@ -19,15 +19,12 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 
 /**
  * This project uses a SpringBoot HelloWorld as a starting point. Then it adds in the capability to cf push a 
- * CXF Rest Service simply by extending PredixSpringBootInitializer.
  * 
  * The idea is that you'll use this project as a starting point for creating your own Rest service.  You can change
  * "predix-boot" to "my-rest-service" or a name that suits you.
  * 
- * We provide 3 types of Rest APIs/Impls and tests that invoke them
+ * We provide a Rest Service and tests that invoke them
  * 1. HelloController - example using a SpringRestTemplate
- * 2. DefaultService - example using a Spring Bean registered with CXF and standard java annotations
- * 3. DynamicService - example using the original Predix way of registering a Rest Service with CXF
  * 
  * The project also provides a point of view around Property file management and Spring Profiles. Here is the hierarchy
  * such that each lower number overrides the one's after it

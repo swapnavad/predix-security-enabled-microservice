@@ -1,4 +1,4 @@
-package com.ge.predix.solsvc.boot.service.spring;
+package com.ge.predix.solsvc.service;
 
 import java.util.Date;
 
@@ -25,13 +25,14 @@ public class HelloController {
 	}
 
 	/**
+	 * Sample Endpoint which returns a Welcome Message
 	 * @param echo - the string to echo back
 	 * @return -
 	 */
 	@SuppressWarnings("nls")
     @RequestMapping("/")
     public String index(@RequestParam(value="echo",defaultValue="echo") String echo) {
-        return "Greetings from Predix Boot! " + (new Date());
+        return "Greetings from Predix Spring Boot! " + (new Date());
     }
 
 }

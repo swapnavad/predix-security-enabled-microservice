@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.ge.predix.solsvc.boot.service.spring.HelloController;
+import com.ge.predix.solsvc.service.HelloController;
 
 /**
  * 
@@ -45,6 +45,6 @@ public class HelloControllerTest {
 	public void getHello() throws Exception {
 		this.mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(content().string(startsWith("Greetings from Predix Boot!")));
+				.andExpect(content().string(startsWith("Greetings from Predix")));
 	}
 }

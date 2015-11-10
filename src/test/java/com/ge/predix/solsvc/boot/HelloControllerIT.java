@@ -52,7 +52,7 @@ public class HelloControllerIT {
 	public void getHello() throws Exception {
 		this.base = new URL("http://localhost:" + this.localServerPort + "/");
 		ResponseEntity<String> response = this.template.getForEntity(this.base.toString(), String.class);
-		assertThat(response.getBody(), startsWith("Greetings from Predix Boot!"));
+		assertThat(response.getBody(), startsWith("Greetings from Predix"));
 
 	}
 }
