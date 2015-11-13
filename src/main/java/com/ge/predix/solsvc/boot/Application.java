@@ -14,6 +14,8 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
@@ -58,10 +60,11 @@ import org.springframework.web.context.support.StandardServletEnvironment;
  */
 @EnableAutoConfiguration(exclude =
 {
-        DataSourceAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class,
-        PersistenceExceptionTranslationAutoConfiguration.class
+        //Add any configuration loading call you want to exclude
+        
 })
 @ComponentScan(basePackages="com.ge.predix.solsvc")
+
 public class Application
 {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
