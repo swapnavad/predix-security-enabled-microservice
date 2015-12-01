@@ -50,19 +50,14 @@ Once you are familiar with the project and ready to make your own microservice, 
   
   Visit service at http://localhost:9092 - a Spring RestTemplate  
   
-  and http://localhost:9092/services/ping - a CXF Rest Endpoint  
-  
-  and http://localhost:9092/services?_wadl - a CXF Rest descriptor
   ```
 1. Push to cloud  
 
     Take a look at the [predix-boot-cf manifest.yml](predix-boot-cf/manifest.yml) which provides properties and instructions for [pushing cloud foundry apps](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html)
   ```
-  $ cd predix-boot-cf
-  
   $ cf push  
   
-  visit http://(cloud-url-here)/services/ping - get the url from the output of cf push  
+  visit http://(cloud-url-here) - get the url from the output of cf push  
   ```
 
 ##Troubleshooting
