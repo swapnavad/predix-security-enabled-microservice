@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ge.predix.solsvc</groupId>
-	<artifactId>predix-boot-cf-spring</artifactId>
+	<artifactId>predix-microservice-cf-spring</artifactId>
 	<version>1.1.4</version>
 
 	<parent>
