@@ -11,7 +11,7 @@ Each project shares the following characteristics
 * Environment Aware for Local, DEV, QA, Stage, Prod
 * Continuous Integration capable
 
-## predix-microservice-cf-jsr311
+## predix-microservice-cf-spring
 
 This project is a cloud-ready microservice that demonstrates how to create [Spring Rest Template](https://spring.io/guides/gs/consuming-rest/) based Services.  You simply change the @RequestMapping url and begin adding your service implementation.  It has SpringBoot, Spring Profiles and Property file management configured and ready for local development vs. cloud deployment.  It is also set up for Test Driven Development with JUnit and Mockito.
 
