@@ -1,33 +1,31 @@
-Predix Boot
+Predix Microservice Template Spring using Spring Rest Template
 ==============
 
-Welcome to Predix Boot, a Predix Backend Microservice Template.  Predix Boot contains 3 sub-projects
+Welcome to Predix Microservice CF Spring, a Predix Backend Microservice Template.  
 
-| Project |  Note | 
-| ------------- | :----- |
-| predix-boot-cf | a java microservice template |
-| predix-boot-dsp-cf | will be deprecated in June 2016 |
-| predix-rest-client | utility used to call other secure microservices in the predix cloud
+Each project shares the following characteristics
+* Test cases and test case framework 
+* Externalized Properties files
+* REST implementation and framework
+* Cloud ready with a Manifest file
+* Environment Aware for Local, DEV, QA, Stage, Prod
+* Continuous Integration capable
 
-The predix-boot-cf project is a cloud-ready microservice that demonstrates how to create either [CXF](https://cxf.apache.org/) or [Spring](https://spring.io/) RestTemplate based REST services.  You simply change the @Path url and begin adding your service implementation.  It has SpringBoot, Spring Profiles and Property file management configured and ready for local development vs. cloud deployment.  It is also set up for Test Driven Development with JUnit and Mockito.  To see how it works, start with the [Application.java](https://github.com/PredixDev/predix-boot/blob/master/predix-boot-cf/src/main/java/com/ge/predix/solsvc/boot/Application.java) in predix-boot-cf.
+## predix-microservice-cf-jsr311
 
-The predix-rest-client project provides standard GET, PUT, POST, DELETE calls with helpers to manage Predix OAuth Security in the cloud.  See the property files and [IOauthRestConfig.java](https://github.com/PredixDev/predix-boot/blob/master/predix-rest-client/src/main/java/com/ge/predix/solsvc/restclient/config/IOauthRestConfig.java) that allow a microservice to connect to Predix UAA (User Authentication and Authorization) servers in the cloud. All the reference app microservices use this utility to make REST calls in the cloud.
+This project is a cloud-ready microservice that demonstrates how to create [Spring Rest Template](https://spring.io/guides/gs/consuming-rest/) based Services.  You simply change the @RequestMapping url and begin adding your service implementation.  It has SpringBoot, Spring Profiles and Property file management configured and ready for local development vs. cloud deployment.  It is also set up for Test Driven Development with JUnit and Mockito.
 
-Once you are familiar with the project and ready to make your own microservice, use the predix-boot-cf project as your starting point for a Cloud Foundry Rest Microservice. Change 'predix-boot' to 'my-servicename' everywhere (using eclipse) and check in to your own repo.
-
->For Predix users migrating from older predix systems, the predix-boot-dsp-cf has all the features of predix-boot-cf, and it brings a backward compatible bundle from a non-cloud Predix implementation to the cloud simply by adding a dependency to your old rest service code.  If you use Spring, you simply add the @ImportResource annotation to list the Spring XML files from your old project.  In other words, it's adding a cloud-foundry wrapper around your old Rest service, which suddenly makes it deployable to the cloud. 
-
-##To Download and Push Predix-Boot
+##To Download and Push predix-microservice-cf
 
 1. Download a [DevBox](https://www.predix.io/catalog/other-resources/devbox.html) and launch it in Virtual Box or install the [Dependencies](#dependencies)
 
 1. [Prepare your environment](#preparation) and follow the steps below to get up and running on Cloud Foundry.   
 
-1. Download Predix-Boot  
+1. Download the project  
   ```
-  $ git clone https://github.com/PredixDev/predix-boot.git  
+  $ git clone https://github.com/PredixDev/predix-microservice-cf-jsr311.git  
   
-  $ cd predix-boot  
+  $ cd predix-microservice-cf-jsr311
   
   $ mvn clean package  
   
@@ -39,25 +37,25 @@ Once you are familiar with the project and ready to make your own microservice, 
   ```
   $ mvn eclipse:clean eclipse:eclipse  
   
-  File/Import/General/Existing Projects/Browse to predix-boot dir  
+  File/Import/General/Existing Projects/Browse to predix-microservice-cf dir  
   
   Check the box 'Search for nested projects'  
   ```
 1. Try it out locally  
   ```
-  in Eclipse - Right Click predix-boot-cf project / Run As / Application 
-  in Eclise STS - Right Click predix-boot-cf project / Run As / Spring Boot Application 
+  in Eclipse - Right Click predix-microservice-cf project / Run As / Application 
+  in Eclise STS - Right Click predix-microservice-cf project / Run As / Spring Boot Application 
   
   Visit service at http://localhost:9092 - a Spring RestTemplate  
   
   ```
 1. Push to cloud  
 
-    Take a look at the [predix-boot-cf manifest.yml](predix-boot-cf/manifest.yml) which provides properties and instructions for [pushing cloud foundry apps](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html)
+    Take a look at the [predix-microservice-cf manifest.yml](manifest.yml) which provides properties and instructions for [pushing cloud foundry apps](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html)
   ```
   $ cf push  
   
-  visit http://(cloud-url-here) - get the url from the output of cf push  
+  visit http://(cloud-url-here)/services/ping - get the url from the output of cf push  
   ```
 
 ##Troubleshooting
@@ -68,7 +66,7 @@ If you encounter a [corporate proxy issue](https://github.com/PredixDev/predix-r
 If you encounter a maven or artifactory account issue, add your predix.io username and encrypted password to a maven ~/.m2/[settings.xml](docs/settings.xml) file on your laptop.  It should be setup already if in a [DevBox](https://www.predix.io/catalog/other-resources/devbox.html).
 
 ##Preparation
-Predix Boot accesses code repos at https://github.com/PredixDev.
+Predix Microservice CF accesses code repos at https://github.com/PredixDev.
 
 The best experience is to use a [DevBox](https://www.predix.io/catalog/other-resources/devbox.html) which has all the tools and settings pre-installed.  
 * In DevBox,  
