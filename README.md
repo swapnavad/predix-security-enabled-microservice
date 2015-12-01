@@ -1,4 +1,4 @@
-Predix Microservice Template Spring using Spring Rest Template
+Predix Microservice Template using Spring Rest Template
 ==============
 
 Welcome to Predix Microservice CF Spring, a Predix Backend Microservice Template.  
