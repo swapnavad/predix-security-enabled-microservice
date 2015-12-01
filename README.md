@@ -23,9 +23,9 @@ This project is a cloud-ready microservice that demonstrates how to create [Spri
 
 1. Download the project  
   ```
-  $ git clone https://github.com/PredixDev/predix-microservice-cf-jsr311.git  
+  $ git clone https://github.com/PredixDev/predix-microservice-cf-spring.git  
   
-  $ cd predix-microservice-cf-jsr311
+  $ cd predix-microservice-cf-spring
   
   $ mvn clean package  
   
