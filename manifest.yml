@@ -2,4 +2,4 @@
 applications:
   - name: predix-boot-cf-spring
     buildpack: java_buildpack
-    path: target/predix-boot-cf-spring-1.1.4.jar
+    path: target/predix-microservice-cf-spring-1.1.4.jar
