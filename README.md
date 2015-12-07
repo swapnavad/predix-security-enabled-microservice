@@ -72,16 +72,17 @@ The best experience is to use a [DevBox](https://www.predix.io/catalog/other-res
 * In DevBox,  
 	* add your <a href="https://maven.apache.org/guides/mini/guide-encryption.html">encrypted</a> predix.io username and password to the ~/.m2/<a href="https://github.com/PredixDev/predix-rmd-ref-app/blob/master/docs/settings.xml">settings.xml</a>
 by replacing predixuser@ge.com with your Predix.io user and pass.
+
 	* to avoid entering user/pass several times, run this command to cache it
-  ```
-  git config --replace-all --global credential.helper 'cache --timeout=7200'
-  ``` 
+	  ```
+	  git config --replace-all --global credential.helper 'cache --timeout=7200'
+	  ``` 
 	* OSX: To enable Copy/Paste using Left Command key.  
-  ```
-    On Host: Please choose VirtualBox/Preferences/Input/Virtual Machine/Host Key Combination.  
-    Set to Right ⌘.  
-    On VM: Choose System/Preference/Keyboard/Layouts/Layout Options/Alt/Win Key Behavior/Ctrl is mapped to Win Keys(and the usual Ctrl keys)
-  ```
+	  ```
+	    On Host: Please choose VirtualBox/Preferences/Input/Virtual Machine/Host Key Combination.  
+	    Set to Right ⌘.  
+	    On VM: Choose System/Preference/Keyboard/Layouts/Layout Options/Alt/Win Key Behavior/Ctrl is mapped to Win Keys(and the usual Ctrl keys)
+	  ```
   
   >We have a second DevBox for GE employees which helps with corporate proxy settings.  
 
