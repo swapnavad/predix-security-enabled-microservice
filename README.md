@@ -70,6 +70,8 @@ Predix Microservice CF accesses code repos at https://github.com/PredixDev.
 
 The best experience is to use a [DevBox](https://www.predix.io/catalog/other-resources/devbox.html) which has all the tools and settings pre-installed.  
 * In DevBox,  
+	* add your <a href="https://maven.apache.org/guides/mini/guide-encryption.html">encrypted</a> predix.io username and password to the ~/.m2/<a href="https://github.com/PredixDev/predix-rmd-ref-app/blob/master/docs/settings.xml">settings.xml</a>
+by replacing predixuser@ge.com with your Predix.io user and pass.
 	* to avoid entering user/pass several times, run this command to cache it
   ```
   git config --replace-all --global credential.helper 'cache --timeout=7200'
