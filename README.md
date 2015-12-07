@@ -94,10 +94,10 @@ by replacing predixuser@ge.com with your Predix.io user and pass.
 	* add your <a href="https://maven.apache.org/guides/mini/guide-encryption.html">encrypted</a> predix.io username and password to the ~/.m2/<a href="https://github.com/PredixDev/predix-rmd-ref-app/blob/master/docs/settings.xml">settings.xml</a>
 by replacing predixuser@ge.com with your Predix.io user and pass.
 
-  * to avoid entering user/pass several times, run this command to cache it
-  ```
-  git config --global credential.helper cache --timeout=7200
-  ```
+  	* to avoid entering user/pass several times, run this command to cache it
+	  ```
+	  git config --global credential.helper cache --timeout=7200
+	  ```
 
 ##Dependencies
 If you are not using DevBox, ensure your development environment is configured with the tools listed here.
