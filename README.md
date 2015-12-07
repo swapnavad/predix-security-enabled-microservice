@@ -3,7 +3,7 @@ Predix Microservice Template using Spring Rest Template
 
 Welcome to Predix Microservice CF Spring, a Predix Backend Microservice Template.  
 
-Each project shares the following characteristics
+Each Microservice Template project shares the following characteristics
 * Test cases and test case framework 
 * Externalized Properties files
 * REST implementation and framework
