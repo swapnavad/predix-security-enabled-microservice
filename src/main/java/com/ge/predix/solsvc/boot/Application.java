@@ -23,7 +23,7 @@ import org.springframework.web.context.support.StandardServletEnvironment;
  * This project uses a SpringBoot HelloWorld as a starting point. Then it adds in the capability to cf push a 
  * 
  * The idea is that you'll use this project as a starting point for creating your own Rest service.  You can change
- * "predix-boot" to "my-rest-service" or a name that suits you.
+ * "predix-microservice-template" to "my-rest-service" or a name that suits you.
  * 
  * We provide a Rest Service and tests that invoke them
  * 1. HelloController - example using a SpringRestTemplate
