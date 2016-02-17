@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
+@SuppressWarnings("javadoc")
 @Configuration
 @EnableWebSecurity
 @ConditionalOnProperty(prefix = "security.basic", name = "enabled", havingValue = "false")
@@ -23,8 +24,10 @@ public class PredixBootSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		//
 	}
 	
+	@SuppressWarnings("nls")
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -46,6 +49,7 @@ public class PredixBootSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
+		//
 	}
 
 }

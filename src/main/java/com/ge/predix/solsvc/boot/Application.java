@@ -7,14 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.web.context.support.StandardServletEnvironment;
@@ -63,6 +59,7 @@ import org.springframework.web.context.support.StandardServletEnvironment;
         //Add any configuration loading call you want to exclude
         
 })
+@PropertySource("classpath:application-default.properties")
 @ComponentScan(basePackages="com.ge.predix.solsvc")
 
 public class Application
@@ -75,7 +72,7 @@ public class Application
      */
     @SuppressWarnings(
     {
-            "nls"
+            "nls", "resource"
     })
     public static void main(String[] args)
     {
