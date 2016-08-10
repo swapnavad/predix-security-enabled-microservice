@@ -2,9 +2,10 @@ package com.ge.predix.solsvc.service;
 
 import java.util.Date;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * An example of creating a Rest api using Spring Annotations @RestController.  
@@ -30,9 +31,10 @@ public class HelloController {
 	 * @return -
 	 */
 	@SuppressWarnings("nls")
-    @RequestMapping("/")
+    @RequestMapping(value="/api", method = RequestMethod.GET)
     public String index(@RequestParam(value="echo",defaultValue="echo") String echo) {
         return "Greetings from Predix Spring Boot! " + (new Date());
     }
+	
 
 }

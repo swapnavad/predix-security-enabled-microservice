@@ -26,7 +26,7 @@
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<jacoco.version>0.7.2.201409121644</jacoco.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-core</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -44,6 +44,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.5.0</version>
 		</dependency>
 	</dependencies>
 
@@ -84,16 +95,17 @@
 				<artifactId>cxf-rt-transports-http-jetty</artifactId>
 				<version>${cxf.version}</version>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
 		<plugins>
 			<plugin>
-                		<groupId>org.codehaus.mojo</groupId>
-                		<artifactId>versions-maven-plugin</artifactId>
-                		<version>2.2</version>
-            		</plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -108,7 +120,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
-<!-- 					<argLine>${surefireArgLine}</argLine> -->
+					<!-- <argLine>${surefireArgLine}</argLine> -->
 				</configuration>
 				<executions>
 					<execution>
@@ -129,89 +141,78 @@
 				</configuration>
 			</plugin>
 			<plugin>
-  				<groupId>org.jacoco</groupId>
-  				<artifactId>jacoco-maven-plugin</artifactId>
-  				<version>${jacoco.version}</version>
-  				<executions>
-			        <!--
-			            Prepares the property pointing to the JaCoCo runtime agent which
-			            is passed as VM argument when Maven the Surefire plugin is executed.
-			        -->
-				        <execution>
-				            <id>pre-unit-test</id>
-				            <goals>
-				                <goal>prepare-agent</goal>
-				            </goals>
-				            <configuration>
-				                <!-- Sets the path to the file which contains the execution data. -->
-				                <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-				                <!--
-				                    Sets the name of the property containing the settings
-				                    for JaCoCo runtime agent.
-				                
-				                <propertyName>surefireArgLine</propertyName>-->
-				                <excludes>
-					                <exclude>com/ge/predix/solsvc/boot/Application.class</exclude>
-					                <exclude>com/ge/predix/solsvc/boot/PredixBootSecurityConfig.class</exclude>
-				                </excludes>
-				             </configuration>
-				        </execution>
-				        <!--
-				            Ensures that the code coverage report for unit tests is created after
-				            unit tests have been run.
-				        -->
-				        <execution>
-				            <id>post-unit-test</id>
-				            <phase>test</phase>
-				            <goals>
-				                <goal>report</goal>
-				            </goals>
-				            <configuration>
-				                <!-- Sets the path to the file which contains the execution data. -->
-				                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-				                <!-- Sets the output directory for the code coverage report. -->
-				                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-				            </configuration>
-				        </execution>
-				         <execution>
-				            <id>pre-integration-test</id>
-				            <phase>pre-integration-test</phase>
-				            <goals>
-				                <goal>prepare-agent</goal>
-				            </goals>
-				            <configuration>
-				                <!-- Sets the path to the file which contains the execution data. -->
-				                <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
-				                <!--
-				                    Sets the name of the property containing the settings
-				                    for JaCoCo runtime agent.
-				               
-				                <propertyName>failsafeArgLine</propertyName> -->
-				            </configuration>
-				        </execution>
-				        <!--
-				            Ensures that the code coverage report for integration tests after
-				            integration tests have been run.
-				        -->
-				        <execution>
-				            <id>post-integration-test</id>
-				            <phase>post-integration-test</phase>
-				            <goals>
-				                <goal>report</goal>
-				            </goals>
-				            <configuration>
-				                <!-- Sets the path to the file which contains the execution data. -->
-				                <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
-				                <!-- Sets the output directory for the code coverage report. -->
-				                <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
-				            </configuration>
-				        </execution>
-			    </executions>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<!-- Prepares the property pointing to the JaCoCo runtime agent which 
+						is passed as VM argument when Maven the Surefire plugin is executed. -->
+					<execution>
+						<id>pre-unit-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+							<!-- Sets the name of the property containing the settings for JaCoCo 
+								runtime agent. <propertyName>surefireArgLine</propertyName> -->
+							<excludes>
+								<exclude>com/ge/predix/solsvc/boot/Application.class</exclude>
+								<exclude>com/ge/predix/solsvc/boot/PredixBootSecurityConfig.class</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+					<!-- Ensures that the code coverage report for unit tests is created 
+						after unit tests have been run. -->
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+							<!-- Sets the output directory for the code coverage report. -->
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>pre-integration-test</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+							<!-- Sets the name of the property containing the settings for JaCoCo 
+								runtime agent. <propertyName>failsafeArgLine</propertyName> -->
+						</configuration>
+					</execution>
+					<!-- Ensures that the code coverage report for integration tests after 
+						integration tests have been run. -->
+					<execution>
+						<id>post-integration-test</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
+							<!-- Sets the output directory for the code coverage report. -->
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

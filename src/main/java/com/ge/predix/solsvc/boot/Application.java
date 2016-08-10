@@ -1,7 +1,12 @@
 package com.ge.predix.solsvc.boot;
 
+import static springfox.documentation.builders.PathSelectors.regex;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +18,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.MutablePropertySources;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.StandardServletEnvironment;
+
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * This project uses a SpringBoot HelloWorld as a starting point. Then it adds in the capability to cf push a 
@@ -61,7 +77,8 @@ import org.springframework.web.context.support.StandardServletEnvironment;
 })
 @PropertySource("classpath:application-default.properties")
 @ComponentScan(basePackages="com.ge.predix.solsvc")
-
+@EnableSwagger2
+@RestController
 public class Application
 {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -106,6 +123,35 @@ public class Application
     }
     
     /**
+     * @return -
+     */
+    @Bean
+    public Docket documentation() {
+        return new Docket(DocumentationType.SWAGGER_2)
+          .select()
+            .apis(RequestHandlerSelectors.any())
+            .paths(regex("/api/*")) //$NON-NLS-1$
+            .build()
+          .pathMapping("/") //$NON-NLS-1$
+          .apiInfo(metadata());
+    }
+    
+    /**
+     * @return -
+     */
+    @Bean
+    UiConfiguration uiConfig() {
+      return new UiConfiguration(
+          "validatorUrl",// url //$NON-NLS-1$
+          "none",       // docExpansion          => none | list //$NON-NLS-1$
+          "alpha",      // apiSorter             => alpha //$NON-NLS-1$
+          "schema",     // defaultModelRendering => schema //$NON-NLS-1$
+          UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS,
+          true,        // enableJsonEditor      => true | false
+          true);        // showRequestHeaders    => true | false
+    }
+    
+    /**
      * Ensure the Tomcat container comes up, not the Jetty one.
      * @return - the factory
      */
@@ -113,6 +159,25 @@ public class Application
     public TomcatEmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory()
     {
         return new TomcatEmbeddedServletContainerFactory();
+    }
+    
+    private ApiInfo metadata() {
+        return new ApiInfoBuilder()
+          .title("Predix Microservice") //$NON-NLS-1$
+          .description("Template for predix micro service") //$NON-NLS-1$
+          .version("1.1.6") //$NON-NLS-1$
+          .build();
+      }
+    
+    /**
+	 * @param response - 
+	 * @throws IOException -
+	 */
+	@SuppressWarnings("nls")
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public void index(HttpServletResponse response) throws IOException {
+		response.sendRedirect("/swagger-ui.html");
+		
     }
 
 }
