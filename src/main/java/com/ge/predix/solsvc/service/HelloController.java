@@ -36,5 +36,14 @@ public class HelloController {
         return "Greetings from Predix Spring Boot! " + (new Date());
     }
 	
+	/**
+	 * @return -
+	 */
+	@SuppressWarnings("nls")
+    @RequestMapping(value="/health", method = RequestMethod.GET)
+    public String health() {
+        return String.format("{'status':'up'}");
+    }
+	
 
 }

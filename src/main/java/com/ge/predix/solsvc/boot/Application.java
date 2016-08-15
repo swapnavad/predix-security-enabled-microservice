@@ -1,12 +1,10 @@
 package com.ge.predix.solsvc.boot;
 
+import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +16,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.MutablePropertySources;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.StandardServletEnvironment;
+
+import com.google.common.base.Predicate;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -78,7 +79,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @PropertySource("classpath:application-default.properties")
 @ComponentScan(basePackages="com.ge.predix.solsvc")
 @EnableSwagger2
-@RestController
+@Controller
 public class Application
 {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
@@ -96,7 +97,7 @@ public class Application
         SpringApplication springApplication = new SpringApplication(Application.class);
         ApplicationContext ctx = springApplication.run(args);
 
-        log.debug("Let's inspect the beans provided by Spring Boot:");
+        log.debug("Let's inspect the beans provided by Spring Boot:"); //$NON-NLS-1$
         String[] beanNames = ctx.getBeanDefinitionNames();
         Arrays.sort(beanNames);
         for (String beanName : beanNames)
@@ -104,12 +105,12 @@ public class Application
             log.debug(beanName);
         }
         
-        log.debug("Let's inspect the profiles provided by Spring Boot:");
+        log.debug("Let's inspect the profiles provided by Spring Boot:"); //$NON-NLS-1$
         String profiles[] = ctx.getEnvironment().getActiveProfiles();
         for (int i = 0; i < profiles.length; i++)
-            log.debug("profile=" + profiles[i]);
+            log.debug("profile=" + profiles[i]); //$NON-NLS-1$
 
-        log.info("Let's inspect the properties provided by Spring Boot:");
+        log.info("Let's inspect the properties provided by Spring Boot:"); //$NON-NLS-1$
         MutablePropertySources propertySources = ((StandardServletEnvironment) ctx.getEnvironment())
                 .getPropertySources();
         Iterator<org.springframework.core.env.PropertySource<?>> iterator = propertySources.iterator();
@@ -117,7 +118,7 @@ public class Application
             Object propertySourceObject = iterator.next();
             if ( propertySourceObject instanceof org.springframework.core.env.PropertySource ) {
                 org.springframework.core.env.PropertySource<?> propertySource = (org.springframework.core.env.PropertySource<?>) propertySourceObject;
-                log.info("propertySource=" + propertySource.getName() + " values=" + propertySource.getSource() + "class=" + propertySource.getClass());           
+                log.info("propertySource=" + propertySource.getName() + " values=" + propertySource.getSource() + "class=" + propertySource.getClass());            //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             }         
         }
     }
@@ -130,11 +131,23 @@ public class Application
         return new Docket(DocumentationType.SWAGGER_2)
           .select()
             .apis(RequestHandlerSelectors.any())
-            .paths(regex("/api/*")) //$NON-NLS-1$
+            .paths(paths()) 
             .build()
           .pathMapping("/") //$NON-NLS-1$
           .apiInfo(metadata());
     }
+    
+    /**
+     * 
+     * @return -
+     */
+   
+    private Predicate<String> paths() {
+        return or(
+            regex("/api/*"), //$NON-NLS-1$
+            regex("/health")); //$NON-NLS-1$
+            //regex("/info")); //$NON-NLS-1$
+      }
     
     /**
      * @return -
@@ -170,14 +183,16 @@ public class Application
       }
     
     /**
-	 * @param response - 
-	 * @throws IOException -
-	 */
-	@SuppressWarnings("nls")
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public void index(HttpServletResponse response) throws IOException {
-		response.sendRedirect("/swagger-ui.html");
-		
+     * @param name - 
+     * @param model -
+     * @return -
+     */
+    @RequestMapping("/")
+    public String greetings(@RequestParam(value="name", required=false, defaultValue="Predix") String name, Model model) {
+        model.addAttribute("name", name); //$NON-NLS-1$
+        return "index"; //$NON-NLS-1$
     }
+    
+   
 
 }
