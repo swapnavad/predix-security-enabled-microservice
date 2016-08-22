@@ -32,8 +32,8 @@ public class HelloController {
 	 */
 	@SuppressWarnings("nls")
     @RequestMapping(value="/api", method = RequestMethod.GET)
-    public String index(@RequestParam(value="echo",defaultValue="echo") String echo) {
-        return "Greetings from Predix Spring Boot! " + (new Date());
+    public String index(@RequestParam(value="echo",defaultValue="echo this text") String echo) {
+        return "Greetings from Predix Spring Boot! echo=" + echo + " " + (new Date());
     }
 	
 	/**
