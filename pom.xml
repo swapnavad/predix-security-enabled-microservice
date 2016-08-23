@@ -24,6 +24,7 @@
 
 		<maven-compiler-plugin.version>2.3.1</maven-compiler-plugin.version>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 		<jacoco.version>0.7.2.201409121644</jacoco.version>
 		<springfox.version>2.5.0</springfox.version>
 	</properties>
@@ -213,6 +214,16 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<configuration>
+					<reportOutputDirectory>${project.basedir}/src/main/resources/static</reportOutputDirectory>
+					<destDir>/javadoc</destDir>
+					<stylesheetfile>${project.basedir}/src/main/resources/javadoc-override/stylesheet.css</stylesheetfile>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -249,5 +260,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	
 </project>

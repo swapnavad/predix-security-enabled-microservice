@@ -42,7 +42,7 @@ public class HelloController {
 	@SuppressWarnings("nls")
     @RequestMapping(value="/health", method = RequestMethod.GET)
     public String health() {
-        return String.format("{'status':'up'}");
+        return String.format("{\"status\":\"up\"}");
     }
 	
 

@@ -59,10 +59,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * Note that Spring Beans in other packages will not be automatically scanned.  You'll need to add 
  * this command if you have other packages this command will do it
- * @ComponentScan(basePackages = {"com.ge.package1", "com.ge.package2"})
+ * \@ComponentScan(basePackages = {"com.ge.package1", "com.ge.package2"})
  * 
  * Or if you want to import Spring XMLs from other dependent projects you can use the @ImportResource, e.g. 
- * @ImportResource(
+ * \@ImportResource(
  * {
  *         "classpath*:META-INF/spring/predix-rest-client-scan-context.xml"
  * })
