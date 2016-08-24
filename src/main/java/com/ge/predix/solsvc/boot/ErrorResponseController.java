@@ -45,10 +45,10 @@ public class ErrorResponseController  implements ErrorController
      * @return -
      */
     @RequestMapping(value = PATH)
-    ErrorJson error(HttpServletRequest request, HttpServletResponse response) {
+    EventError error(HttpServletRequest request, HttpServletResponse response) {
         // Appropriate HTTP response code (e.g. 404 or 500) is automatically set by Spring. 
         // Here we just define response body.
-        return new ErrorJson(response.getStatus(), getErrorAttributes(request, this.debug));
+        return new EventError(response.getStatus(), getErrorAttributes(request, this.debug));
     }
 
     @Override

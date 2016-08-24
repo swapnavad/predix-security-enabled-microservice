@@ -16,7 +16,7 @@ import java.util.Map;
  * 
  * @author 212421693 -
  */
-public class ErrorJson
+public class EventError
 {
     /**
      * status
@@ -46,7 +46,7 @@ public class ErrorJson
      * @param status -
      * @param errorAttributes -
      */
-    public ErrorJson(int status, Map<String, Object> errorAttributes) {
+    public EventError(int status, Map<String, Object> errorAttributes) {
         this.status = status;
         this.error = (String) errorAttributes.get("error"); //$NON-NLS-1$
         this.message = (String) errorAttributes.get("message"); //$NON-NLS-1$
