@@ -222,6 +222,7 @@
 					<reportOutputDirectory>${project.basedir}/src/main/resources/static</reportOutputDirectory>
 					<destDir>/javadoc</destDir>
 					<stylesheetfile>${project.basedir}/src/main/resources/javadoc-override/stylesheet.css</stylesheetfile>
+					<bottom>Copyright &#169; {currentYear} Powered by Predix. All rights reserved.</bottom>
 				</configuration>
 			</plugin>
 		</plugins>
