@@ -50,7 +50,7 @@ public class HelloControllerIT {
 	@SuppressWarnings("nls")
     @Test
 	public void getHello() throws Exception {
-		this.base = new URL("http://localhost:" + this.localServerPort + "/api");
+		this.base = new URL("http://localhost:" + this.localServerPort + "/echo");
 		ResponseEntity<String> response = this.template.getForEntity(this.base.toString(), String.class);
 		assertThat(response.getBody(), startsWith("Greetings from Predix"));
 
