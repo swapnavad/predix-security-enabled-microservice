@@ -7,7 +7,7 @@
  * with the terms and conditions stipulated in the agreement/contract
  * under which the software has been supplied.
  */
- 
+
 package com.ge.predix.solsvc.boot;
 
 import java.util.Map;
@@ -29,15 +29,16 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * @author 212421693 -
  */
 @RestController
-public class ErrorResponseController  implements ErrorController
+public class ErrorResponseController
+        implements ErrorController
 {
     private static final String PATH = "/error"; //$NON-NLS-1$
 
     @Value("${debug:false}")
-    private boolean debug;
+    private boolean             debug;
 
     @Autowired
-    private ErrorAttributes errorAttributes;
+    private ErrorAttributes     errorAttributes;
 
     /**
      * @param request -
@@ -45,19 +46,22 @@ public class ErrorResponseController  implements ErrorController
      * @return -
      */
     @RequestMapping(value = PATH)
-    EventError error(HttpServletRequest request, HttpServletResponse response) {
-        // Appropriate HTTP response code (e.g. 404 or 500) is automatically set by Spring. 
+    EventError error(HttpServletRequest request, HttpServletResponse response)
+    {
+        // Appropriate HTTP response code (e.g. 404 or 500) is automatically set by Spring.
         // Here we just define response body.
         return new EventError(response.getStatus(), getErrorAttributes(request, this.debug));
     }
 
     @Override
-    public String getErrorPath() {
+    public String getErrorPath()
+    {
         return PATH;
     }
 
-    private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {
+    private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace)
+    {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-		return this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
-	}
+        return this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
+    }
 }

@@ -27,35 +27,43 @@ import com.ge.predix.solsvc.boot.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest({ "server.port=0" })
-public class HelloControllerIT {
+@IntegrationTest(
+{
+        "server.port=0"
+})
+public class HelloControllerIT
+{
 
-	@Value("${local.server.port}")
-	private int localServerPort;
+    @Value("${local.server.port}")
+    private int          localServerPort;
 
-	private URL base;
-	private RestTemplate template;
+    private URL          base;
+    private RestTemplate template;
 
-	/**
-	 * @throws Exception
-	 *             -
-	 */
-	@Before
-	public void setUp() throws Exception {
-		this.template = new TestRestTemplate();
-	}
+    /**
+     * @throws Exception
+     *             -
+     */
+    @Before
+    public void setUp()
+            throws Exception
+    {
+        this.template = new TestRestTemplate();
+    }
 
-	/**
-	 * 
-	 * @throws Exception
-	 *             -
-	 */
-	@SuppressWarnings("nls")
-	@Test
-	public void getHello() throws Exception {
-		this.base = new URL("http://localhost:" + this.localServerPort + "/echo");
-		ResponseEntity<String> response = this.template.getForEntity(this.base.toString(), String.class);
-		assertThat(response.getBody(), startsWith("Greetings from Predix"));
+    /**
+     * 
+     * @throws Exception
+     *             -
+     */
+    @SuppressWarnings("nls")
+    @Test
+    public void getHello()
+            throws Exception
+    {
+        this.base = new URL("http://localhost:" + this.localServerPort + "/echo");
+        ResponseEntity<String> response = this.template.getForEntity(this.base.toString(), String.class);
+        assertThat(response.getBody(), startsWith("Greetings from Predix"));
 
-	}
+    }
 }

@@ -25,27 +25,32 @@ import com.ge.predix.solsvc.service.HelloController;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MockServletContext.class)
 @WebAppConfiguration
-public class HelloControllerTest {
+public class HelloControllerTest
+{
 
-	private MockMvc mvc;
+    private MockMvc mvc;
 
-	/**
-	 * @throws Exception
-	 *             -
-	 */
-	@Before
-	public void setUp() throws Exception {
-		this.mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
-	}
+    /**
+     * @throws Exception
+     *             -
+     */
+    @Before
+    public void setUp()
+            throws Exception
+    {
+        this.mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
+    }
 
-	/**
-	 * @throws Exception
-	 *             -
-	 */
-	@SuppressWarnings("nls")
-	@Test
-	public void getHello() throws Exception {
-		this.mvc.perform(MockMvcRequestBuilders.get("/echo").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk()).andExpect(content().string(startsWith("Greetings from Predix")));
-	}
+    /**
+     * @throws Exception
+     *             -
+     */
+    @SuppressWarnings("nls")
+    @Test
+    public void getHello()
+            throws Exception
+    {
+        this.mvc.perform(MockMvcRequestBuilders.get("/echo").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(content().string(startsWith("Greetings from Predix")));
+    }
 }

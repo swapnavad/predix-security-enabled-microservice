@@ -78,135 +78,152 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * @author predix
  */
-@EnableAutoConfiguration(exclude = {
-		// Add any configuration loading call you want to exclude
+@EnableAutoConfiguration(exclude =
+{
+        // Add any configuration loading call you want to exclude
 
 })
 @PropertySource("classpath:application-default.properties")
 @ComponentScan(basePackages = "com.ge.predix.solsvc")
 @EnableSwagger2
 @Controller
-public class Application {
-	private static final Logger log = LoggerFactory.getLogger(Application.class);
+public class Application
+{
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
-	/**
-	 * @param args
-	 *            -
-	 */
-	@SuppressWarnings({ "resource" })
-	public static void main(String[] args) {
-		SpringApplication springApplication = new SpringApplication(Application.class);
-		ApplicationContext ctx = springApplication.run(args);
+    /**
+     * @param args
+     *            -
+     */
+    @SuppressWarnings(
+    {
+            "resource"
+    })
+    public static void main(String[] args)
+    {
+        SpringApplication springApplication = new SpringApplication(Application.class);
+        ApplicationContext ctx = springApplication.run(args);
 
-		log.debug("Let's inspect the beans provided by Spring Boot:"); //$NON-NLS-1$
-		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-		for (String beanName : beanNames) {
-			log.debug(beanName);
-		}
+        log.debug("Let's inspect the beans provided by Spring Boot:"); //$NON-NLS-1$
+        String[] beanNames = ctx.getBeanDefinitionNames();
+        Arrays.sort(beanNames);
+        for (String beanName : beanNames)
+        {
+            log.debug(beanName);
+        }
 
-		log.debug("Let's inspect the profiles provided by Spring Boot:"); //$NON-NLS-1$
-		String profiles[] = ctx.getEnvironment().getActiveProfiles();
-		for (int i = 0; i < profiles.length; i++)
-			log.debug("profile=" + profiles[i]); //$NON-NLS-1$
+        log.debug("Let's inspect the profiles provided by Spring Boot:"); //$NON-NLS-1$
+        String profiles[] = ctx.getEnvironment().getActiveProfiles();
+        for (int i = 0; i < profiles.length; i++)
+            log.debug("profile=" + profiles[i]); //$NON-NLS-1$
 
-		log.info("Let's inspect the properties provided by Spring Boot:"); //$NON-NLS-1$
-		MutablePropertySources propertySources = ((StandardServletEnvironment) ctx.getEnvironment())
-				.getPropertySources();
-		Iterator<org.springframework.core.env.PropertySource<?>> iterator = propertySources.iterator();
-		while (iterator.hasNext()) {
-			Object propertySourceObject = iterator.next();
-			if (propertySourceObject instanceof org.springframework.core.env.PropertySource) {
-				org.springframework.core.env.PropertySource<?> propertySource = (org.springframework.core.env.PropertySource<?>) propertySourceObject;
-				log.info("propertySource=" + propertySource.getName() + " values=" + propertySource.getSource() //$NON-NLS-1$ //$NON-NLS-2$
-						+ "class=" + propertySource.getClass()); //$NON-NLS-1$
-			}
-		}
-	}
+        log.info("Let's inspect the properties provided by Spring Boot:"); //$NON-NLS-1$
+        MutablePropertySources propertySources = ((StandardServletEnvironment) ctx.getEnvironment())
+                .getPropertySources();
+        Iterator<org.springframework.core.env.PropertySource<?>> iterator = propertySources.iterator();
+        while (iterator.hasNext())
+        {
+            Object propertySourceObject = iterator.next();
+            if ( propertySourceObject instanceof org.springframework.core.env.PropertySource )
+            {
+                org.springframework.core.env.PropertySource<?> propertySource = (org.springframework.core.env.PropertySource<?>) propertySourceObject;
+                log.info("propertySource=" + propertySource.getName() + " values=" + propertySource.getSource() //$NON-NLS-1$ //$NON-NLS-2$
+                        + "class=" + propertySource.getClass()); //$NON-NLS-1$
+            }
+        }
+    }
 
-	/**
-	 * @return -
-	 */
-	@Bean
-	public Docket documentation() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(paths())
-				.build().pathMapping("/") //$NON-NLS-1$
-				.apiInfo(metadata());
-	}
+    /**
+     * @return -
+     */
+    @Bean
+    public Docket documentation()
+    {
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(paths())
+                .build().pathMapping("/") //$NON-NLS-1$
+                .apiInfo(metadata());
+    }
 
-	/**
-	 * 
-	 * @return -
-	 */
+    /**
+     * 
+     * @return -
+     */
 
-	private Predicate<String> paths() {
-		return or(regex("/echo/*"), //$NON-NLS-1$
-				regex("/health")); //$NON-NLS-1$
-		// regex("/info")); //$NON-NLS-1$
-	}
+    private Predicate<String> paths()
+    {
+        return or(regex("/echo/*"), //$NON-NLS-1$
+                regex("/health")); //$NON-NLS-1$
+        // regex("/info")); //$NON-NLS-1$
+    }
 
-	/**
-	 * @return -
-	 */
-	@Bean
-	UiConfiguration uiConfig() {
-		return new UiConfiguration("validatorUrl", // url //$NON-NLS-1$
-				"none", // docExpansion => none | list //$NON-NLS-1$
-				"alpha", // apiSorter => alpha //$NON-NLS-1$
-				"schema", // defaultModelRendering => schema //$NON-NLS-1$
-				UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, true, // enableJsonEditor
-																		// =>
-																		// true
-																		// |
-																		// false
-				true); // showRequestHeaders => true | false
-	}
+    /**
+     * @return -
+     */
+    @Bean
+    UiConfiguration uiConfig()
+    {
+        return new UiConfiguration("validatorUrl", // url //$NON-NLS-1$
+                "none", // docExpansion => none | list //$NON-NLS-1$
+                "alpha", // apiSorter => alpha //$NON-NLS-1$
+                "schema", // defaultModelRendering => schema //$NON-NLS-1$
+                UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, true, // enableJsonEditor
+                                                                        // =>
+                                                                        // true
+                                                                        // |
+                                                                        // false
+                true); // showRequestHeaders => true | false
+    }
 
-	/**
-	 * Ensure the Tomcat container comes up, not the Jetty one.
-	 * 
-	 * @return - the factory
-	 */
-	@Bean
-	public TomcatEmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory() {
-		return new TomcatEmbeddedServletContainerFactory();
-	}
+    /**
+     * Ensure the Tomcat container comes up, not the Jetty one.
+     * 
+     * @return - the factory
+     */
+    @Bean
+    public TomcatEmbeddedServletContainerFactory tomcatEmbeddedServletContainerFactory()
+    {
+        return new TomcatEmbeddedServletContainerFactory();
+    }
 
-	private ApiInfo metadata() {
-		return new ApiInfoBuilder().title("Predix Microservice") //$NON-NLS-1$
-				.description("Template for predix micro service") //$NON-NLS-1$
-				.version("1.1.6") //$NON-NLS-1$
-				.build();
-	}
+    private ApiInfo metadata()
+    {
+        return new ApiInfoBuilder().title("Predix Microservice") //$NON-NLS-1$
+                .description("Template for predix micro service") //$NON-NLS-1$
+                .version("1.1.6") //$NON-NLS-1$
+                .build();
+    }
 
-	/**
-	 * @param name
-	 *            -
-	 * @param model
-	 *            -
-	 * @return -
-	 */
-	@RequestMapping("/")
-	public String greetings(@RequestParam(value = "name", required = false, defaultValue = "Predix") String name,
-			Model model) {
-		model.addAttribute("name", name); //$NON-NLS-1$
-		return "index"; //$NON-NLS-1$
-	}
+    /**
+     * @param name
+     *            -
+     * @param model
+     *            -
+     * @return -
+     */
+    @RequestMapping("/")
+    public String greetings(@RequestParam(value = "name", required = false, defaultValue = "Predix") String name,
+            Model model)
+    {
+        model.addAttribute("name", name); //$NON-NLS-1$
+        return "index"; //$NON-NLS-1$
+    }
 
-	/**
-	 * 
-	 * @param request
-	 *            - HttpServletRequest
-	 * @param response
-	 *            - HttpServletResponse
-	 * @return - Model View
-	 * @throws Exception
-	 *             - Exception
-	 */
-	@RequestMapping("/docs")
-	protected ModelAndView docs(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return new ModelAndView("redirect:/javadoc/index.html"); //$NON-NLS-1$
+    /**
+     * 
+     * @param request
+     *            - HttpServletRequest
+     * @param response
+     *            - HttpServletResponse
+     * @return - Model View
+     * @throws Exception
+     *             - Exception
+     */
+    @RequestMapping("/docs")
+    protected ModelAndView docs(HttpServletRequest request, HttpServletResponse response)
+            throws Exception
+    {
+        return new ModelAndView("redirect:/javadoc/index.html"); //$NON-NLS-1$
 
-	}
+    }
 
 }
