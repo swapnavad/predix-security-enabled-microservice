@@ -21,22 +21,24 @@ import com.ge.predix.solsvc.boot.Application;
 
 /**
  * Spins up Spring Boot and accesses the URLs of the Rest apis
+ * 
  * @author predix
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest({"server.port=0"})
+@IntegrationTest({ "server.port=0" })
 public class HelloControllerIT {
-    
-    @Value("${local.server.port}")
-    private int localServerPort;
+
+	@Value("${local.server.port}")
+	private int localServerPort;
 
 	private URL base;
 	private RestTemplate template;
 
 	/**
-	 * @throws Exception -
+	 * @throws Exception
+	 *             -
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -45,10 +47,11 @@ public class HelloControllerIT {
 
 	/**
 	 * 
-	 * @throws Exception -
+	 * @throws Exception
+	 *             -
 	 */
 	@SuppressWarnings("nls")
-    @Test
+	@Test
 	public void getHello() throws Exception {
 		this.base = new URL("http://localhost:" + this.localServerPort + "/echo");
 		ResponseEntity<String> response = this.template.getForEntity(this.base.toString(), String.class);

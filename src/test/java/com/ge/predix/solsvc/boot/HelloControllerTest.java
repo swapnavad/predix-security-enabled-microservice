@@ -30,7 +30,8 @@ public class HelloControllerTest {
 	private MockMvc mvc;
 
 	/**
-	 * @throws Exception -
+	 * @throws Exception
+	 *             -
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -38,13 +39,13 @@ public class HelloControllerTest {
 	}
 
 	/**
-	 * @throws Exception -
+	 * @throws Exception
+	 *             -
 	 */
 	@SuppressWarnings("nls")
-    @Test
+	@Test
 	public void getHello() throws Exception {
 		this.mvc.perform(MockMvcRequestBuilders.get("/echo").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().string(startsWith("Greetings from Predix")));
+				.andExpect(status().isOk()).andExpect(content().string(startsWith("Greetings from Predix")));
 	}
 }

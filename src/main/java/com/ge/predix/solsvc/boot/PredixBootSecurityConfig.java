@@ -13,42 +13,39 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
-
 @SuppressWarnings("javadoc")
 @Configuration
 @EnableWebSecurity
 @ConditionalOnProperty(prefix = "security.basic", name = "enabled", havingValue = "false")
-public class PredixBootSecurityConfig extends WebSecurityConfigurerAdapter{
+public class PredixBootSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SecurityProperties security;
-	
-	
+
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		//
 	}
-	
+
 	@SuppressWarnings("nls")
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+
 		if (this.security.isRequireSsl()) {
 			http.requiresChannel().anyRequest().requiresSecure();
 		}
 		if (!this.security.isEnableCsrf()) {
 			http.csrf().disable();
 		}
-		SpringBootWebSecurityConfiguration.configureHeaders(http.headers(),
-				this.security.getHeaders());
-		
-		http.headers().addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy","script-src 'self'"));
+		SpringBootWebSecurityConfiguration.configureHeaders(http.headers(), this.security.getHeaders());
+
+		http.headers().addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy", "script-src 'self'"));
 		http.headers().frameOptions().disable();
-		http.headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
+		http.headers()
+				.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
 	}
-	
+
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//
 	}
 
