@@ -8,9 +8,9 @@
 	<h2>Greetings from Predix Spring Boot!</h2>
 	<hr></hr>
 	<p>Explore your Microservice</p>
-	<p><a href="/api">Api explorer</a></p>
-	<p><a href="/health">Microservice Health</a></p>
-  	<p><a href="/docs">Docs</a></p>
+  	<p><a th:href="@{${api}}">Api explorer</a></p>
+	<p><a th:href="@{${health}}">Microservice Health</a></p>
+  	<p><a th:href="@{${docs}}">Docs</a></p>
   
 </body>
 </html>

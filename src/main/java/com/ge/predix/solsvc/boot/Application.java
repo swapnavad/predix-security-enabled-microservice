@@ -3,6 +3,7 @@ package com.ge.predix.solsvc.boot;
 import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.StandardServletEnvironment;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -90,6 +93,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Application
 {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
+    
+    @SuppressWarnings("javadoc")
+    @Value("${spring.profiles.active:local}")
+    String profile ;
+
 
     /**
      * @param args
@@ -194,17 +202,24 @@ public class Application
     }
 
     /**
-     * @param name
-     *            -
-     * @param model
-     *            -
+     * @param request -
+     * @param name -
+     * @param model -
      * @return -
      */
     @RequestMapping("/")
-    public String greetings(@RequestParam(value = "name", required = false, defaultValue = "Predix") String name,
+    public String greetings(HttpServletRequest request ,@RequestParam(value = "name", required = false, defaultValue = "Predix") String name,
             Model model)
-    {
-        model.addAttribute("name", name); //$NON-NLS-1$
+    {   StringBuffer requesturi = request.getRequestURL();
+        String applicationURl = requesturi.toString().replaceAll("http", "https");//$NON-NLS-1$ //$NON-NLS-2$ 
+        if("local".equalsIgnoreCase(this.profile)) { //$NON-NLS-1$
+            applicationURl = requesturi.toString(); // localhost support for http
+        }
+        model.addAttribute("api",applicationURl.toString()+"api");//$NON-NLS-1$ //$NON-NLS-2$ 
+        model.addAttribute("health",applicationURl.toString()+"health");//$NON-NLS-1$ //$NON-NLS-2$ 
+        model.addAttribute("docs",applicationURl.toString()+"docs");//$NON-NLS-1$ //$NON-NLS-2$ 
+
+        
         return "index"; //$NON-NLS-1$
     }
 
@@ -225,5 +240,33 @@ public class Application
         return new ModelAndView("redirect:/javadoc/index.html"); //$NON-NLS-1$
 
     }
+    
+    
+    /**
+     * @param request -
+     * @param response -
+     * @throws IOException -
+     */
+    @RequestMapping("/api")
+    public @ResponseBody void api(HttpServletRequest request ,HttpServletResponse response ) throws IOException
+    {   String applicationURl = getApplicationUrl(request);
+        response.sendRedirect(applicationURl.replace("/api", "/swagger-ui.html")); //$NON-NLS-1$//$NON-NLS-2$
+
+    }
+    
+    /**
+     * 
+     * @param request
+     * @return - Application URL
+     */
+    private String getApplicationUrl (final HttpServletRequest request){
+   
+        String applicationURl = request.getRequestURL().toString().replaceAll("http", "https");//$NON-NLS-1$ //$NON-NLS-2$ 
+        if("local".equalsIgnoreCase(this.profile)) { //$NON-NLS-1$
+            applicationURl = request.getRequestURL().toString(); // localhost support for http
+        }
+        return applicationURl;
+    }
+    
 
 }
