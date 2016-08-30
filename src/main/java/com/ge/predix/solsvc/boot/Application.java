@@ -217,8 +217,6 @@ public class Application
         }
         model.addAttribute("api",applicationURl.toString()+"api");//$NON-NLS-1$ //$NON-NLS-2$ 
         model.addAttribute("health",applicationURl.toString()+"health");//$NON-NLS-1$ //$NON-NLS-2$ 
-        model.addAttribute("docs",applicationURl.toString()+"docs");//$NON-NLS-1$ //$NON-NLS-2$ 
-
         
         return "index"; //$NON-NLS-1$
     }

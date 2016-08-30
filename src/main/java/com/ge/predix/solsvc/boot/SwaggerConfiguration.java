@@ -29,8 +29,7 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter
         registry.addRedirectViewController("/api/configuration/ui", "/configuration/ui"); //$NON-NLS-1$ //$NON-NLS-2$
         registry.addRedirectViewController("/api/configuration/security", "/configuration/security"); //$NON-NLS-1$ //$NON-NLS-2$
         registry.addRedirectViewController("/api/swagger-resources", "/swagger-resources"); //$NON-NLS-1$ //$NON-NLS-2$
-     //   registry.addRedirectViewController("/api", "/swagger-ui.html"); //$NON-NLS-1$ //$NON-NLS-2$
-     //   registry.addRedirectViewController("/api/", "/swagger-ui.html"); //$NON-NLS-1$ //$NON-NLS-2$
+ 
     }
 
     @Override
