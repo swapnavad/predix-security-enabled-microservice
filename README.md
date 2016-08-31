@@ -1,3 +1,9 @@
+<a href="../../../../pages/adoption/predix-microservice-cf-spring/javadocs/index.html" target="_blank" >
+	<img height="50px" width="100px" src="images/javadoc.png" alt="view javadoc"></a>
+&nbsp;
+<a href="../../../../pages/adoption/predix-microservice-cf-spring" target="_blank">
+	<img height="50px" width="100px" src="images/pages.jpg" alt="view github pages">
+</a>
 Predix Microservice Template using Spring Rest Template
 ==============
 
