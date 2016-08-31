@@ -97,6 +97,11 @@ public class Application
     @SuppressWarnings("javadoc")
     @Value("${spring.profiles.active:local}")
     String profile ;
+    
+    @SuppressWarnings("javadoc")
+    @Value("${java.docs.url:null}")
+    String docsUrl ;
+
 
 
     /**
@@ -217,7 +222,7 @@ public class Application
         }
         model.addAttribute("api",applicationURl.toString()+"api");//$NON-NLS-1$ //$NON-NLS-2$ 
         model.addAttribute("health",applicationURl.toString()+"health");//$NON-NLS-1$ //$NON-NLS-2$ 
-        
+        model.addAttribute("docs",this.docsUrl);//$NON-NLS-1$ 
         return "index"; //$NON-NLS-1$
     }
 
