@@ -6,4 +6,4 @@ applications:
     timeout : 180
 env:
    SPRING_PROFILES_ACTIVE : cloud  
-   JAVA_DOCS_URL : http://predixdev.github.io/predix-microservice-cf-spring
+   JAVA_DOCS_URL : https://predixdev.github.io/predix-microservice-cf-spring
