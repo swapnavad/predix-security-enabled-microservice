@@ -110,7 +110,6 @@ public class Application
      */
     @SuppressWarnings(
     {
-            "resource"
     })
     public static void main(String[] args)
     {

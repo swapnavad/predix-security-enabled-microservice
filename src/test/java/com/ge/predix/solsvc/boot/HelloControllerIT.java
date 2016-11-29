@@ -17,8 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import com.ge.predix.solsvc.boot.Application;
-
 /**
  * Spins up Spring Boot and accesses the URLs of the Rest apis
  * 
