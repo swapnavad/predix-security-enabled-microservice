@@ -53,6 +53,8 @@ This project is a cloud-ready microservice that demonstrates how to create [Spri
   in Eclise STS - Right Click predix-microservice-cf project / Run As / Spring Boot Application 
   
   Visit service at http://localhost:9092 - a Spring RestTemplate  
+  Visit service at http://localhost:9092/echo - with Authorization Header
+  This endpoint checks the token for application-scope to determine application specfic scope authorization
   
   ```
 1. Push to cloud  
